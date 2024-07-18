@@ -5,7 +5,8 @@ defmodule DesafioCli.PeopleEnumeration do
   end
 
   def populate(names) do
-    {_, names} = names |> Enum.reduce({%{}, []}, fn(name, {map, list}) -> update_list(name, map, list) end)
+    {_, names} = names
+        |> Enum.reduce({%{}, []}, fn(name, {map, list}) -> update_list(name, map, list) end)
     names
   end
 
@@ -47,7 +48,9 @@ defmodule DesafioCli.PeopleEnumeration do
   end
 
   def decimal_to_roman(number, roman_table, roman_repr) when number > 0 do
-    {value, char} = roman_table |> Enum.reduce({nil, ""}, fn ({value, char}, closest) -> get_closest(value, char, closest, number) end)
+    {value, char} = roman_table
+        |> Enum.reduce({nil, ""}, fn ({value, char}, closest) -> get_closest(value, char, closest, number) end)
+
     "#{roman_repr}#{char}" <> decimal_to_roman(number - value, roman_table, roman_repr)
   end
 
@@ -57,10 +60,11 @@ defmodule DesafioCli.PeopleEnumeration do
 
   def get_closest(value, char, closest, number) do
     case closest do
-      {nil, _} -> case number >= value do
-                    true -> {value, char}
-                    false -> closest
-                  end
+      {nil, _} ->
+        case number >= value do
+          true -> {value, char}
+          false -> closest
+        end
       _ -> closest
     end
   end
