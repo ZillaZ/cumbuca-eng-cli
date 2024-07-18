@@ -23,14 +23,19 @@ defmodule DesafioCli.IO do
     is_empty
   end
 
-  def print_numbered_names(result, ok_names, failed_names) do
+  def print_numbered_names(result, ok_names, failed_names) when ok_names != [] or failed_names != [] do
     case result do
       :failed ->
         IO.puts("Execution finished with errors. The following names have not been processed:")
         Enum.map(failed_names, fn name -> IO.puts(name) end)
+        IO.puts("Successfully processed names:")
+        Enum.map(ok_names, fn name -> IO.puts(name) end)
       :ok ->
         IO.puts("Successfully processed names:")
         Enum.map(ok_names, fn name -> IO.puts(name) end)
     end
+  end
+  def print_numbered_names(_result, _ok_names, _failed_names) do
+    IO.puts("No names were given.")
   end
 end
