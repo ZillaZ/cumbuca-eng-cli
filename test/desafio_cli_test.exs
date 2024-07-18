@@ -31,7 +31,7 @@ defmodule DesafioCliTest do
   end
 
   test "Only unique names" do
-    names = ["Lucas", "Luiz", "Gercino", "Dayse", "David", "Wictor"]
+    names = ["Lucas", "Luiz", "Gercino", "Dayse", "David", "Wictor", "Aline"]
     {result, ok_names, failed_names} = enumerate(names)
     IO.puts(ok_names)
     assert result == :ok
