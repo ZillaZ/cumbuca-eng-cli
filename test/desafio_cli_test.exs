@@ -37,6 +37,13 @@ defmodule DesafioCliTest do
       && ok_names == Enum.map(names, fn name -> name <> " I" end)
       && failed_names == []
   end
+
+  test "No names given" do
+    {result, ok_names, failed_names} = enumerate([])
+    assert result == :ok
+      && ok_names == []
+      && failed_names == []
+  end
 end
 
 defmodule NameGen do
