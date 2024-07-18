@@ -1,4 +1,8 @@
-defmodule DesafioCli.PeopleEnumeration do
+defmodule RoyalEnumeration.Enumeration do
+  @moduledoc """
+  Names enumeration responsible module.
+  """
+
   def enumerate(names) do
     result = populate(names)
     get_results(result)
