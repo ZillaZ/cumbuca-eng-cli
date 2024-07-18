@@ -5,6 +5,7 @@ defmodule RoyalEnumeration.IO do
 
   def read_input(name_list \\ []) do
     name = get_name()
+
     case is_empty(name) do
       true -> name_list
       false -> read_input(name_list ++ [name])
@@ -26,9 +27,10 @@ defmodule RoyalEnumeration.IO do
   def print_numbered_names(result, ok_names, failed_names) when ok_names != [] do
     IO.puts("Successfully processed names:")
     Enum.map(ok_names, fn name -> IO.puts(name) end)
+
     if result == :failed do
-        IO.puts("Execution finished with errors. The following names have not been processed:")
-        Enum.map(failed_names, fn name -> IO.puts(name) end)
+      IO.puts("Execution finished with errors. The following names have not been processed:")
+      Enum.map(failed_names, fn name -> IO.puts(name) end)
     end
   end
 

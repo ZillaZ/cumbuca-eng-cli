@@ -1,5 +1,7 @@
 defmodule RoyalEnumeration do
-  import RoyalEnumeration.IO, only: [print_usage_instructions: 0, read_input: 0, print_numbered_names: 3]
+  import RoyalEnumeration.IO,
+    only: [print_usage_instructions: 0, read_input: 0, print_numbered_names: 3]
+
   import RoyalEnumeration.Enumeration, only: [enumerate: 1]
 
   @moduledoc """
@@ -12,4 +14,3 @@ defmodule RoyalEnumeration do
     print_numbered_names(result, ok_names, failed_names)
   end
 end
-

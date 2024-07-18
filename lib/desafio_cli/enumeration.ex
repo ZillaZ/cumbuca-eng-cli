@@ -9,26 +9,40 @@ defmodule RoyalEnumeration.Enumeration do
   end
 
   def populate(names) do
-    {_, names} = names
-        |> Enum.reduce({%{}, []}, fn(name, {map, list}) -> update_list(name, map, list) end)
+    {_, names} =
+      names
+      |> Enum.reduce({%{}, []}, fn name, {map, list} -> update_list(name, map, list) end)
+
     names
   end
 
- def get_results(names) do
-    ok_names = Enum.filter(names, fn {result, _} -> result == :ok end) |> Enum.map(fn {_, name} -> name end)
-    failed_names = Enum.filter(names, fn {result, _} -> result == :failed end) |> Enum.map(fn {_, name} -> name end)
-    result = case failed_names do
-      [] -> :ok
-      _ -> :err
-    end
+  def get_results(names) do
+    ok_names =
+      Enum.filter(names, fn {result, _} -> result == :ok end)
+      |> Enum.map(fn {_, name} -> name end)
+
+    failed_names =
+      Enum.filter(names, fn {result, _} -> result == :failed end)
+      |> Enum.map(fn {_, name} -> name end)
+
+    result =
+      case failed_names do
+        [] -> :ok
+        _ -> :err
+      end
+
     {result, ok_names, failed_names}
- end
+  end
 
   def update_list(name, map, list) do
     number = Map.get(map, name, 1)
+
     case number > 3999 do
-      true -> {map, list ++ [{:failed, name}]}
-      _ -> {Map.put(map, name, number + 1), list ++ [{:ok, "#{name} #{decimal_to_roman(number)}"}]}
+      true ->
+        {map, list ++ [{:failed, name}]}
+
+      _ ->
+        {Map.put(map, name, number + 1), list ++ [{:ok, "#{name} #{decimal_to_roman(number)}"}]}
     end
   end
 
@@ -46,14 +60,18 @@ defmodule RoyalEnumeration.Enumeration do
       {9, "IX"},
       {5, "V"},
       {4, "IV"},
-      {1, "I"},
+      {1, "I"}
     ]
+
     decimal_to_roman(number, roman_table, "")
   end
 
   def decimal_to_roman(number, roman_table, roman_repr) when number > 0 do
-    {value, char} = roman_table
-        |> Enum.reduce({nil, ""}, fn ({value, char}, closest) -> get_closest(value, char, closest, number) end)
+    {value, char} =
+      roman_table
+      |> Enum.reduce({nil, ""}, fn {value, char}, closest ->
+        get_closest(value, char, closest, number)
+      end)
 
     "#{roman_repr}#{char}" <> decimal_to_roman(number - value, roman_table, roman_repr)
   end
@@ -69,7 +87,9 @@ defmodule RoyalEnumeration.Enumeration do
           true -> {value, char}
           false -> closest
         end
-      _ -> closest
+
+      _ ->
+        closest
     end
   end
 end
