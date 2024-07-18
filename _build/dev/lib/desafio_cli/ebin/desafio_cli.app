@@ -2,7 +2,8 @@
              [{optional_applications,[]},
               {applications,[kernel,stdlib,elixir,logger]},
               {description,"desafio_cli"},
-              {modules,['Elixir.DesafioCli','Elixir.DesafioCli.IO',
-                        'Elixir.DesafioCli.PeopleEnumeration']},
+              {modules,['Elixir.RoyalEnumeration',
+                        'Elixir.RoyalEnumeration.Enumeration',
+                        'Elixir.RoyalEnumeration.IO']},
               {registered,[]},
               {vsn,"0.1.0"}]}.
