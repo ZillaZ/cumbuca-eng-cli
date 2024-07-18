@@ -19,5 +19,4 @@ Executando o binário, sua CLI será executada.
 ## Todo
 - Mensagem com as instruções de uso do programa
 - Refatorar essa bombakk muito feio filho
-- Otimizar pq números mt grandes fzem o processo morrer D:
-- Escrever mais testes
+- Melhorar os testes
