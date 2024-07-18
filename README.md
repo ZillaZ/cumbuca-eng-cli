@@ -14,9 +14,3 @@ Com o Elixir instalado, você terá a ferramenta de build `mix`.
 Para buildar o projeto, use o comando `mix escript.build` nesta pasta.
 Isso irá gerar um binário com o mesmo nome do projeto na pasta.
 Executando o binário, sua CLI será executada.
-
-
-## Todo
-- Mensagem com as instruções de uso do programa
-- Refatorar essa bombakk muito feio filho
-- Melhorar os testes
