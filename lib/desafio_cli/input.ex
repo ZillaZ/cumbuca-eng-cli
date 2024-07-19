@@ -14,8 +14,10 @@ defmodule RoyalEnumeration.IO do
 
   def get_name() do
     line = IO.gets("")
-    name = String.trim(line)
-    name
+    case line do
+      :eof -> ""
+      _ -> String.trim(line)
+    end
   end
 
   def is_empty(name) do
