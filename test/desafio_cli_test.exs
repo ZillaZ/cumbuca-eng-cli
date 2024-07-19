@@ -62,17 +62,6 @@ defmodule RoyalEnumerationTest do
              failed_names == []
   end
 
-  #@tag timeout: :infinity
-  #test "A lot unique names" do
-  #  IO.puts("Generating 100.000 names...")
-  #  names = NameGen.gen_unique_names(100_000, [], 0)
-  #  {result, ok_names, failed_names} = enumerate(names)
-#
- #   assert result == :ok &&
- #            ok_names == Enum.map(names, fn name -> name <> " I" end) &&
- #            failed_names == []
- # end
-
   test "A reeeeeally big name" do
     {name, times} = {"Nines", 10_000_000}
     repeated_name = NameGen.repeat_name(name, times)
@@ -145,7 +134,6 @@ defmodule RoyalEnumerationTest do
     assert value == 1000
     && closest == "M"
   end
-
 end
 
 defmodule NameGen do
