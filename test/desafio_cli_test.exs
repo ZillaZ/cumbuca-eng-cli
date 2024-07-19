@@ -63,7 +63,7 @@ defmodule RoyalEnumerationTest do
   end
 
   @tag timeout: :infinity
-  test "A shit ton of unique names" do
+  test "A lot unique names" do
     IO.puts("Generating 100.000 names...")
     names = NameGen.gen_unique_names(100_000, [], 0)
     {result, ok_names, failed_names} = enumerate(names)
@@ -83,7 +83,7 @@ defmodule RoyalEnumerationTest do
              failed_names == []
   end
 
-  test "A fairly big sequence of fairly big names" do
+  test "A fairly big sequence of fairly big unique names" do
     names =
       NameGen.gen_unique_names(1_000, [], 100_000_000_000)
       |> Enum.map(fn name -> NameGen.repeat_name(name, 100) end)
