@@ -48,6 +48,23 @@ defmodule RoyalEnumeration.Enumeration do
   end
 
   def decimal_to_roman(number) do
+    case number > 3999 do
+      true -> {:failed, number}
+      false -> {:ok, decimal_to_roman(number, "")}
+    end
+  end
+
+  def decimal_to_roman(number, roman_repr) when number > 0 do
+    {value, char} = get_closest_repr(number, 0, nil)
+
+    "#{roman_repr}#{char}" <> decimal_to_roman(number - value, roman_repr)
+  end
+
+  def decimal_to_roman(0, _roman_expr) do
+    ""
+  end
+
+  def get_closest_repr(number, index, closest) when closest == nil do
     roman_table = [
       {1000, "M"},
       {900, "CM"},
@@ -64,32 +81,18 @@ defmodule RoyalEnumeration.Enumeration do
       {1, "I"}
     ]
 
-    case number > 3999 do
-      true -> {:failed, number}
-      false -> {:ok, decimal_to_roman(number, roman_table, "")}
-    end
-  end
-
-  def decimal_to_roman(number, roman_table, roman_repr) when number > 0 do
-    {value, char} = get_closest(number, roman_table, 0, nil)
-
-    "#{roman_repr}#{char}" <> decimal_to_roman(number - value, roman_table, roman_repr)
-  end
-
-  def decimal_to_roman(0, _roman_table, _roman_expr) do
-    ""
-  end
-
-  def get_closest(number, roman_table, index, closest) when closest == nil do
     {value, roman_repr} = Enum.at(roman_table, index)
 
     case value <= number do
-      true -> {value, roman_repr}
-      false -> get_closest(number, roman_table, index + 1, nil)
+      true ->
+        {value, roman_repr}
+
+      false ->
+        get_closest_repr(number, index + 1, nil)
     end
   end
 
-  def get_closest(_number, _roman_table, _index, closest) do
+  def get_closest_repr(_number, _index, closest) do
     closest
   end
 end

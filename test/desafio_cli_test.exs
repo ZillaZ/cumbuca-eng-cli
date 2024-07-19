@@ -1,6 +1,6 @@
 defmodule RoyalEnumerationTest do
   use ExUnit.Case
-  import RoyalEnumeration.Enumeration, only: [enumerate: 1, decimal_to_roman: 1, get_closest: 4]
+  import RoyalEnumeration.Enumeration, only: [enumerate: 1, decimal_to_roman: 1, get_closest_repr: 3]
   doctest RoyalEnumeration
 
   test "More than 4 thousand equal names" do
@@ -92,45 +92,15 @@ defmodule RoyalEnumerationTest do
   end
 
   test "Closest match on roman table fails" do
-   roman_table = [
-      {1000, "M"},
-      {900, "CM"},
-      {500, "D"},
-      {400, "CD"},
-      {100, "C"},
-      {90, "XC"},
-      {50, "L"},
-      {40, "XL"},
-      {10, "X"},
-      {9, "IX"},
-      {5, "V"},
-      {4, "IV"},
-      {1, "I"}
-    ]
     number = 390
-    {value, closest} = get_closest(number, roman_table, 0, nil)
+    {value, closest} = get_closest_repr(number, 0, nil)
     assert value == 100
     && closest == "C"
   end
 
   test "Closest match on roman table works" do
-   roman_table = [
-      {1000, "M"},
-      {900, "CM"},
-      {500, "D"},
-      {400, "CD"},
-      {100, "C"},
-      {90, "XC"},
-      {50, "L"},
-      {40, "XL"},
-      {10, "X"},
-      {9, "IX"},
-      {5, "V"},
-      {4, "IV"},
-      {1, "I"}
-    ]
     number = 2024
-    {value, closest} = get_closest(number, roman_table, 0, nil)
+    {value, closest} = get_closest_repr(number, 0, nil)
     assert value == 1000
     && closest == "M"
   end
