@@ -36,13 +36,14 @@ defmodule RoyalEnumeration.Enumeration do
 
   def update_list(name, map, list) do
     number = Map.get(map, name, 1)
+    {result, roman_repr} = decimal_to_roman(number)
 
-    case number > 3999 do
-      true ->
+    case result do
+      :failed ->
         {map, list ++ [{:failed, name}]}
 
-      _ ->
-        {Map.put(map, name, number + 1), list ++ [{:ok, "#{name} #{decimal_to_roman(number)}"}]}
+      :ok ->
+        {Map.put(map, name, number + 1), list ++ [{:ok, "#{name} #{roman_repr}"}]}
     end
   end
 
@@ -63,15 +64,14 @@ defmodule RoyalEnumeration.Enumeration do
       {1, "I"}
     ]
 
-    decimal_to_roman(number, roman_table, "")
+    case number > 3999 do
+      true -> {:failed, number}
+      false -> {:ok, decimal_to_roman(number, roman_table, "")}
+    end
   end
 
   def decimal_to_roman(number, roman_table, roman_repr) when number > 0 do
-    {value, char} =
-      roman_table
-      |> Enum.reduce({nil, ""}, fn {value, char}, closest ->
-        get_closest(value, char, closest, number)
-      end)
+    {value, char} = get_closest(number, roman_table, 0, nil)
 
     "#{roman_repr}#{char}" <> decimal_to_roman(number - value, roman_table, roman_repr)
   end
@@ -80,16 +80,16 @@ defmodule RoyalEnumeration.Enumeration do
     ""
   end
 
-  def get_closest(value, char, closest, number) do
-    case closest do
-      {nil, _} ->
-        case number >= value do
-          true -> {value, char}
-          false -> closest
-        end
+  def get_closest(number, roman_table, index, closest) when closest == nil do
+    {value, roman_repr} = Enum.at(roman_table, index)
 
-      _ ->
-        closest
+    case value <= number do
+      true -> {value, roman_repr}
+      false -> get_closest(number, roman_table, index + 1, nil)
     end
+  end
+
+  def get_closest(_number, _roman_table, _index, closest) do
+    closest
   end
 end
