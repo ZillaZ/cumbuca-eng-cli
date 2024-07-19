@@ -24,7 +24,9 @@ cd cumbuca-eng-cli
 ### Docker
 Primeiro, você precisa ter o [docker](https://docs.docker.com/desktop/install/linux-install) e o [docker compose](https://docs.docker.com/compose/install) instalados.
 
-Com o docker e docker compose instalados, é só iniciar a CLI usando o docker compose:
+Crie um `compose.yml` igual a [este](https://github.com/ZillaZ/cumbuca-eng-cli/blob/main/compose.yml).
+
+Com o docker e docker compose instalados, é só iniciar a CLI usando o docker compose no mesmo diretório em que o `compose.yml` está:
 ```
 docker compose up
 docker compose run royal
