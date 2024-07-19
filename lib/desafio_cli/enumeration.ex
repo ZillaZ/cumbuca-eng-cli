@@ -48,7 +48,8 @@ defmodule RoyalEnumeration.Enumeration do
   end
 
   def decimal_to_roman(number) do
-    case number > 3999 do
+    biggest_roman_repr = 3999
+    case number > biggest_roman_repr do
       true -> {:failed, number}
       false -> {:ok, decimal_to_roman(number, "")}
     end
