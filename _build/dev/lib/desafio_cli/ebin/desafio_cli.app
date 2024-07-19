@@ -1,9 +1,0 @@
-{application,desafio_cli,
-             [{optional_applications,[]},
-              {applications,[kernel,stdlib,elixir,logger]},
-              {description,"desafio_cli"},
-              {modules,['Elixir.RoyalEnumeration',
-                        'Elixir.RoyalEnumeration.Enumeration',
-                        'Elixir.RoyalEnumeration.IO']},
-              {registered,[]},
-              {vsn,"0.1.0"}]}.
