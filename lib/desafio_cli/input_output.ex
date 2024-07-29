@@ -7,8 +7,8 @@ defmodule RoyalEnumeration.IO do
     name = get_name()
 
     case name_is_empty(name) do
-      true -> name_list
-      false -> read_input(name_list ++ [name])
+      true -> Enum.reverse(name_list)
+      false -> read_input([name] ++ name_list)
     end
   end
 

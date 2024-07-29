@@ -1,13 +1,13 @@
 defmodule RoyalEnumerationTest do
   use ExUnit.Case
-  import RoyalEnumeration.Enumeration, only: [enumerate: 1, decimal_to_roman: 1, get_closest_repr: 3]
+  import RoyalEnumeration.Enumeration, only: [enumerate: 1, decimal_to_roman: 1, get_closest_repr: 2]
   doctest RoyalEnumeration
 
   test "More than 4 thousand equal names" do
     {result, _ok_names, failed_names} = enumerate(NameGen.gen_repeated_list("Lucas", 5000))
 
     assert result == :err &&
-             Enum.filter(failed_names, fn name -> name != "Lucas" end) == []
+             Enum.filter(failed_names, fn name -> String.trim(name) != "Lucas" end) == []
   end
 
   test "Needs to subtract" do
@@ -93,14 +93,14 @@ defmodule RoyalEnumerationTest do
 
   test "Closest match on roman table fails" do
     number = 390
-    {value, closest} = get_closest_repr(number, 0, nil)
+    {value, closest} = get_closest_repr(number, 0)
     assert value == 100
     && closest == "C"
   end
 
   test "Closest match on roman table works" do
     number = 2024
-    {value, closest} = get_closest_repr(number, 0, nil)
+    {value, closest} = get_closest_repr(number, 0)
     assert value == 1000
     && closest == "M"
   end
